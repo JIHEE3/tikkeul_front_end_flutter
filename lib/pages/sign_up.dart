@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:tikkeul/utils/validate.dart' as validate;
 import 'package:tikkeul/widget/text_form_field.dart';
 
+import '../widget/circle_avatar.dart';
 import '../widget/gender_dropdown.dart';
 import '../widget/label_wrapper.dart';
 
@@ -16,6 +17,16 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  String _avatar = '';
+  String _id = '';
+  String _password = '';
+  String _firstName = '';
+  String _lastName = '';
+  String _birthDate = '';
+  String _gender = 'N';
+  String _email = '';
+  String _phoneNumber = '';
+
   // 폼의 상태를 얻기 위한 키
   final _formkey = GlobalKey<FormState>();
   final TextEditingController _idController = TextEditingController();
@@ -84,6 +95,16 @@ class _SignUpState extends State<SignUp> {
     return null;
   }
 
+  void _handleAvatarChange(String path) {
+    _avatar = path;
+    print(_avatar);
+  }
+
+  void _handleGenderChange(String value) {
+    _gender = value;
+    print(_gender);
+  }
+
   /**
    * 
    * 
@@ -110,10 +131,15 @@ class _SignUpState extends State<SignUp> {
               _submitted ? AutovalidateMode.always : AutovalidateMode.disabled,
           child: Column(
             children: [
+              CommonCircleAvatar(
+                onChange: _handleAvatarChange,
+              ),
               CommonTextFormField(
                 controller: _idController,
                 label: 'ID',
-                onSaved: (val) {},
+                onSaved: (val) {
+                  _id = val;
+                },
                 validator: (val) {
                   if (val!.trim().isEmpty) {
                     return '필수사항입니다.';
@@ -131,7 +157,9 @@ class _SignUpState extends State<SignUp> {
               CommonTextFormField(
                 controller: _pwController,
                 label: '비밀번호',
-                onSaved: (val) {},
+                onSaved: (val) {
+                  _password = val;
+                },
                 validator: (val) {
                   if (val!.trim().isEmpty) {
                     return '필수사항입니다.';
@@ -159,7 +187,9 @@ class _SignUpState extends State<SignUp> {
               ),
               CommonTextFormField(
                 label: '성',
-                onSaved: (val) {},
+                onSaved: (val) {
+                  _lastName = val;
+                },
                 validator: (val) {
                   if (val!.trim().isEmpty) {
                     return '필수사항입니다.';
@@ -172,7 +202,9 @@ class _SignUpState extends State<SignUp> {
               ),
               CommonTextFormField(
                 label: '이름',
-                onSaved: (val) {},
+                onSaved: (val) {
+                  _firstName = val;
+                },
                 validator: (val) {
                   if (val!.trim().isEmpty) {
                     return '필수사항입니다.';
@@ -185,7 +217,9 @@ class _SignUpState extends State<SignUp> {
               ),
               CommonTextFormField(
                 label: '생년월일',
-                onSaved: (val) {},
+                onSaved: (val) {
+                  _birthDate = val;
+                },
                 validator: (val) {
                   if (val!.trim().isEmpty) {
                     return '필수사항입니다.';
@@ -203,12 +237,15 @@ class _SignUpState extends State<SignUp> {
                 label: '성별',
                 childrenWidget: Container(
                   alignment: Alignment.centerLeft,
-                  child: GenderDropdownButton(),
+                  child: GenderDropdownButton(
+                      selected: _gender, onChange: _handleGenderChange),
                 ),
               ),
               CommonTextFormField(
                 label: '이메일',
-                onSaved: (val) {},
+                onSaved: (val) {
+                  _email = val;
+                },
                 validator: (val) {
                   if (val!.trim().isEmpty) {
                     return '필수사항입니다.';
@@ -225,7 +262,9 @@ class _SignUpState extends State<SignUp> {
                 controller: _phoneNumberController,
                 keyboardType: TextInputType.number,
                 label: '휴대전화',
-                onSaved: (val) {},
+                onSaved: (val) {
+                  _phoneNumber = val;
+                },
                 validator: (val) {
                   if (val!.trim().isEmpty) {
                     return '필수사항입니다.';
@@ -258,7 +297,19 @@ class _SignUpState extends State<SignUp> {
                     // 검증시 처리
                     print('검증 완료');
 
-                    widget.onSubmit();
+                    _formkey.currentState!.save();
+
+                    print(_avatar);
+                    print(_id);
+                    print(_password);
+                    print(_firstName);
+                    print(_lastName);
+                    print(_birthDate);
+                    print(_gender);
+                    print(_email);
+                    print(_phoneNumber);
+
+                    // widget.onSubmit();
                   }
                 },
                 child: Text('가입하기'),
