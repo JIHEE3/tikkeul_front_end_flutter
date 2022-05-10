@@ -8,8 +8,8 @@ Future<Dio> tikkeulDio() async {
 
   dio.interceptors.add(InterceptorsWrapper(
     // onRequest: (options, handler) {},
-    onError: (error, handler) {
-      if (error.response == null) {
+    onError: (res, handler) {
+      if (res.error != null) {
         var tsb = TikkeulSnackBar(
           message: "네트워크 에러 입니다. 관리자에게 문의하세요.",
           type: SnackBarType.error,
