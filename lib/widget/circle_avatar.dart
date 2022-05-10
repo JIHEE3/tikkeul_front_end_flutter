@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -27,24 +29,47 @@ class _CommonCircleAvatarState extends State<CommonCircleAvatar> {
     }
   }
 
+  void _handleRemoveImg() {
+    setState(() {
+      _avatarImg = null;
+    });
+
+    if (widget.onChange != null) {
+      widget.onChange!('');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return (IconButton(
-      iconSize: 60,
-      onPressed: _pickImg,
-      icon: CircleAvatar(
-        radius: 60,
-        backgroundColor: Colors.grey,
-        child: _avatarImg == null
-            ? Icon(
-                Icons.person,
-                size: 50,
-                color: Colors.white,
-              )
-            : null,
-        backgroundImage:
-            _avatarImg != null ? NetworkImage(_avatarImg!.path) : null,
-      ),
+    return (Column(
+      children: [
+        IconButton(
+          iconSize: 60,
+          onPressed: _pickImg,
+          icon: CircleAvatar(
+            radius: 60,
+            backgroundColor: Colors.grey,
+            child: _avatarImg == null
+                ? Icon(
+                    Icons.person,
+                    size: 50,
+                    color: Colors.white,
+                  )
+                : null,
+            backgroundImage:
+                _avatarImg != null ? FileImage(File(_avatarImg!.path)) : null,
+          ),
+        ),
+        Container(
+          height: 50,
+          child: _avatarImg != null
+              ? TextButton(
+                  onPressed: _handleRemoveImg,
+                  child: Text('프로필 사진 제거'),
+                )
+              : null,
+        )
+      ],
     ));
   }
 }
