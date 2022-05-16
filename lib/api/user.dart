@@ -17,3 +17,10 @@ signUp(FormData formData) async {
 
   return await dio.post('/users/signup', data: formData);
 }
+
+signIn(String id, String password) async {
+  var dio = await tikkeulDio();
+
+  return await dio
+      .post('/users/signin', data: {'id': id, 'password': password});
+}
