@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tikkeul/api/user.dart';
+import 'package:tikkeul/api/user.dart' show signUp, isExistedId;
 import 'package:tikkeul/utils/validate.dart' as validate;
 import 'package:tikkeul/widget/text_form_field.dart';
 
-import '../constants/enums.dart';
-import '../utils/tikkeul_snack_bar.dart';
-import '../widget/circle_avatar.dart';
-import '../widget/gender_dropdown.dart';
-import '../widget/label_wrapper.dart';
+import 'package:tikkeul/constants/enums.dart';
+import 'package:tikkeul/utils/tikkeul_snack_bar.dart';
+import 'package:tikkeul/widget/circle_avatar.dart';
+import 'package:tikkeul/widget/gender_dropdown.dart';
+import 'package:tikkeul/widget/label_wrapper.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
