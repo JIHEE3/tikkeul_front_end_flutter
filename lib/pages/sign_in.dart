@@ -44,7 +44,7 @@ class _SignInState extends State<SignIn> {
               type: SnackBarType.success,
             ).showSnackBar();
 
-            Navigator.pushNamed(context, '/home');
+            Navigator.pushReplacementNamed(context, '/home');
           }
         }
       };
