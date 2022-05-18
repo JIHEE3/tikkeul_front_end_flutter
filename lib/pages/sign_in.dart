@@ -63,7 +63,7 @@ class _SignInState extends State<SignIn> {
         body: Center(
           child: Container(
             width: 350,
-            height: 340,
+            height: 390,
             color: Colors.white,
             child: Container(
               padding: EdgeInsets.all(32),
@@ -109,6 +109,15 @@ class _SignInState extends State<SignIn> {
                       onPressed: _handleSubmit(context),
                       child: Text('로그인'),
                     ),
+                    SizedBox(
+                      height: 8.0,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/signUp');
+                      },
+                      child: Text('회원가입'),
+                    )
                   ],
                 ),
               ),
