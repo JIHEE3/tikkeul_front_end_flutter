@@ -40,12 +40,13 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<key>NSPhotoLibraryUsageDescription</key>
-		<string></string>
-	<key>NSCameraUsageDescription</key>
-		<string></string>
-	<key>NSMicrophoneUsageDescription</key>
-		<string></string>
 	<false/>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+  <string>Upload images for screen background</string>
+  <key>NSCameraUsageDescription</key>
+  <string>Upload image from camera for screen background</string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>Post videos to profile</string>
 </dict>
 </plist>
