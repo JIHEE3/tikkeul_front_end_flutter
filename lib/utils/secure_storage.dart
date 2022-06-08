@@ -6,7 +6,7 @@ addAccessToken(String accessToken) async {
   await storage.write(key: 'ACCESS_TOKEN', value: accessToken);
 }
 
-getAccessToken() async {
+Future<String?> getAccessToken() async {
   const storage = FlutterSecureStorage();
 
   return await storage.read(key: 'ACCESS_TOKEN');
@@ -18,7 +18,7 @@ addRefreshToken(String refreshToken) async {
   await storage.write(key: 'REFRESH_TOKEN', value: refreshToken);
 }
 
-getRefreshToken() async {
+Future<String?> getRefreshToken() async {
   const storage = FlutterSecureStorage();
 
   return await storage.read(key: 'REFRESH_TOKEN');
