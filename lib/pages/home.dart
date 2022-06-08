@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tikkeul/pages/account_book.dart';
+import 'package:tikkeul/pages/settings.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -8,20 +10,36 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var _selectedIndex = 0;
+  var _pages = [
+    AccountBook(),
+    Settings(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Tikkeul'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          child: Text('Temp'),
-          onPressed: () {
-            // Named route를 사용하여 두 번째 화면으로 전환합니다.
-            Navigator.pushNamed(context, '/signIn');
-          },
-        ),
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        currentIndex: _selectedIndex,
+        items: [
+          BottomNavigationBarItem(
+              label: '가계부',
+              icon: Icon(
+                Icons.auto_stories_outlined,
+              )),
+          BottomNavigationBarItem(
+            label: '설정',
+            icon: Icon(
+              Icons.settings,
+            ),
+          ),
+        ],
       ),
     );
   }
