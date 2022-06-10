@@ -3,7 +3,9 @@ import '../models/dropdown_item.dart';
 
 class GenderDropdownButton extends StatefulWidget {
   String selected = 'N';
-  GenderDropdownButton({Key? key, this.selected = 'N'}) : super(key: key);
+  Function? onChange;
+  GenderDropdownButton({Key? key, this.selected = 'N', this.onChange})
+      : super(key: key);
 
   @override
   State<GenderDropdownButton> createState() => _GenderDropdownButtonState();
@@ -30,6 +32,9 @@ class _GenderDropdownButtonState extends State<GenderDropdownButton> {
         setState(() {
           widget.selected = value;
         });
+        if (widget.onChange != null) {
+          widget.onChange!(value);
+        }
       },
     );
   }

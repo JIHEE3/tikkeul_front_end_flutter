@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:tikkeul/pages/home.dart';
 import 'package:tikkeul/pages/sign_in.dart';
 import 'package:tikkeul/pages/sign_up.dart';
+import 'package:tikkeul/utils/secure_storage.dart' show getAccessToken;
 
 import 'globals.dart';
 
-void main() {
-  bool _isLogin = false;
+void main() async {
+  // 기본 언어 초기화
+  await initializeDateFormatting();
+  WidgetsFlutterBinding.ensureInitialized();
+  var accessToken = await getAccessToken();
+  bool _isLogin = accessToken != null && accessToken.isNotEmpty ? true : false;
+
   String _initialRoute = _isLogin ? '/home' : '/signIn';
   // String _initialRoute = '/test';
 
-  // runApp(const MyApp());
   runApp(MaterialApp(
     navigatorKey: navigatorKey,
     scaffoldMessengerKey: snackbarKey,
@@ -20,7 +26,6 @@ void main() {
       ).copyWith(
         secondary: Colors.indigo,
       ),
-      // textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.purple)),
     ),
     title: 'Tikkeul',
     initialRoute: _initialRoute,
